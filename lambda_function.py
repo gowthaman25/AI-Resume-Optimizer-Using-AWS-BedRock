@@ -6,7 +6,7 @@ from datetime import datetime
 s3 = boto3.client("s3")
 bedrock = boto3.client("bedrock-runtime", region_name="us-east-1")
 
-INPUT_BUCKET = "gowthaman-bedrock-resume-input"
+#INPUT_BUCKET = "gowthaman-bedrock-resume-input"
 OUTPUT_BUCKET = "gowthaman-bedrock-resume-output"
 
 MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
@@ -44,7 +44,7 @@ Return only the optimized resume.
 def invoke_bedrock(prompt):
     body = {
         "anthropic_version": "bedrock-2023-05-31",
-        "max_tokens": 1500,
+        "max_tokens": 1200,
         "temperature": 0.4,
         "messages": [
             {
@@ -84,11 +84,12 @@ def lambda_handler(event, context):
     try:
         body = json.loads(event["body"])
 
-        resume_key = body["resume_key"]
+        #resume_key = body["resume_key"]
         jd_text = body["job_description"]
 
         # Step 1: Get Resume
-        resume_text = extract_text_from_s3(INPUT_BUCKET, resume_key)
+        #resume_text = extract_text_from_s3(INPUT_BUCKET, resume_key)
+        resume_text = body["resume_text"]
 
         # Step 2: Build Prompt
         prompt = build_prompt(resume_text, jd_text)
