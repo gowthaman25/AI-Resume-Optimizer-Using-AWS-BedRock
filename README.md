@@ -1,6 +1,6 @@
 # AI-Resume-Optimizer-Using-AWS-BedRock
 Serverless GenAI solution that optimizes resumes based on job descriptions using Amazon Bedrock. 
-This system reads a resume from S3, aligns it with a given Job Description (JD), improves ATS compatibility, and stores the optimized version back in S3.
+This system gets resume from Sreamlit, aligns it with a given Job Description (JD), improves ATS compatibility, and stores the optimized version back in S3.
 
 ## 🏗️ Architecture Overview
 
