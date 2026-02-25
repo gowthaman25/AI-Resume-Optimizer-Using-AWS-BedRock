@@ -43,7 +43,7 @@ Why Haiku?
 
 ## 🔄 Process Flow
 ### 1️⃣ Resume
-from streamlit lambda shares resume to BedRock
+    from streamlit lambda shares resume to BedRock
 ### 2️⃣ Invoke Lambda with JSON Event
 ```bash
 {
@@ -54,8 +54,7 @@ from streamlit lambda shares resume to BedRock
 
 ### 3️⃣ Lambda Execution Steps
 
-✔ Fetch resume from S3
-   Build optimized ATS prompt
+✔  Build optimized ATS prompt
    Invoke Bedrock model
    Receive structured improved resume
 
@@ -75,7 +74,6 @@ from streamlit lambda shares resume to BedRock
 ✔ Bedrock Permissions
 ✔ bedrock:InvokeModel
 ✔ S3 Permissions
-✔ s3:GetObject
 ✔ s3:PutObject
 ✔ s3:ListBucket
 ✔ CloudWatch
