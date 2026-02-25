@@ -7,29 +7,31 @@ This system reads a resume from S3, aligns it with a given Job Description (JD),
 User
   │
   ▼
-API Gateway (Optional)
-  │
-  ▼
-AWS Lambda
-  │
-  ├── Read Resume from S3 (Input Bucket)
-  ├── Build ATS Optimization Prompt
-  ├── Invoke Amazon Bedrock (Claude 3 Haiku)
-  ├── Receive Optimized Resume
-  └── Store Result in S3 (Output Bucket)
-  │
-  ▼
-User downloads optimized resume via Pre-Signed URL
+Browser
+   │
+   ▼
+Streamlit (Frontend UI)
+   │
+   ▼
+API Gateway (HTTP API)
+   │
+   ▼
+Lambda
+   │
+   ▼
+Amazon Bedrock (Claude 3 Haiku)
+   │
+   ▼
+S3 (Optimized Resume)
 
 ## 🧩 AWS Services Used
-Amazon S3 – Store input resumes & optimized outputs
+Amazon S3 – Store optimized outputs
 AWS Lambda – Backend processing logic
 Amazon Bedrock (Claude 3 Haiku) – LLM for resume optimization
 IAM – Secure permissions
 CloudWatch – Logging & monitoring
 
 ## 📂 S3 Bucket Structure
-Input Bucket - gowthaman-bedrock-resume-input
 Output Bucket - gowthaman-bedrock-resume-output
 
 ## 🧠 Model Used
@@ -40,15 +42,12 @@ Why Haiku?
 ✔ Suitable for structured transformation tasks like resume optimization
 
 ## 🔄 Process Flow
-### 1️⃣ Upload Resume
-
-Upload .txt resume file to:
-S3 → gowthaman-bedrock-resume-input
-
+### 1️⃣ Resume
+from streamlit lambda shares resume to BedRock
 ### 2️⃣ Invoke Lambda with JSON Event
 ```bash
 {
-  "resume_key": "resume.txt",
+  resume_text = body["resume_text"],
   "job_description": "Looking for AWS engineer with Lambda experience"
 }
 ```
